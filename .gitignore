@@ -1,0 +1,5 @@
+# Ignore the virtual environment folder
+myenv/
+
+# Ignore other large files, if needed
+*.so
