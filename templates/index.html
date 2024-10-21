@@ -9,11 +9,13 @@
 <body>
     <h1>Mask Detection</h1>
     <video id="video" width="640" height="480" autoplay></video>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <div id="debug"></div>
     <script>
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
+        const debugDiv = document.getElementById('debug');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -21,6 +23,7 @@
             })
             .catch(err => {
                 console.error("Error accessing the camera", err);
+                debugDiv.innerHTML += `<p>Error accessing the camera: ${err.message}</p>`;
             });
 
         function processFrame() {
@@ -30,10 +33,12 @@
             axios.post('/process_image', { image: imageData })
                 .then(response => {
                     const results = response.data;
+                    debugDiv.innerHTML = `<p>Received results: ${JSON.stringify(results)}</p>`;
                     drawResults(results);
                 })
                 .catch(error => {
                     console.error("Error processing the image", error);
+                    debugDiv.innerHTML += `<p>Error processing the image: ${error.message}</p>`;
                 });
         }
 
@@ -53,14 +58,10 @@
                 ctx.font = '16px Arial';
                 ctx.fillText(`${result.class}: ${result.confidence.toFixed(2)}`, x, y - 5);
             });
-
-            // Display the canvas
-            canvas.style.display = 'block';
-            video.style.display = 'none';
         }
 
-        // Process a frame every 100ms
-        setInterval(processFrame, 100);
+        // Process a frame every 500ms
+        setInterval(processFrame, 500);
     </script>
 </body>
 </html>
