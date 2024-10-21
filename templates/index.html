@@ -3,10 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Mask Detection</title>
+    <title>Mask Detection</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <h1>Live Mask Detection</h1>
-    <img src="{{ url_for('video_feed') }}" width="720" height="540">
+    <h1>Mask Detection</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Error accessing the camera", err);
+            });
+
+        function processFrame() {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/jpeg');
+
+            axios.post('/process_image', { image: imageData })
+                .then(response => {
+                    const results = response.data;
+                    drawResults(results);
+                })
+                .catch(error => {
+                    console.error("Error processing the image", error);
+                });
+        }
+
+        function drawResults(results) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            results.forEach(result => {
+                const [x, y, w, h] = result.bbox;
+                const color = result.class === 'Masked' ? 'green' : 'red';
+                
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(x, y, w, h);
+
+                ctx.fillStyle = color;
+                ctx.font = '16px Arial';
+                ctx.fillText(`${result.class}: ${result.confidence.toFixed(2)}`, x, y - 5);
+            });
+
+            // Display the canvas
+            canvas.style.display = 'block';
+            video.style.display = 'none';
+        }
+
+        // Process a frame every 100ms
+        setInterval(processFrame, 100);
+    </script>
 </body>
 </html>
