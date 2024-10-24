@@ -4,8 +4,18 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import base64
 import logging
+from flask import Flask, render_template
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/about')
+def camera():
+    return render_template('about.html')
+
 model = load_model('model.h5')
 
 # Set up logging
@@ -25,9 +35,6 @@ def detect_mask_in_frame(face_crop, model, Image_size=100):
     predicted_class = ['Masked', 'Not Masked'][np.argmax(prediction)]
     return predicted_class, float(prediction[0][np.argmax(prediction)])
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 @app.route('/process_image', methods=['POST'])
 def process_image():

@@ -1,0 +1,210 @@
+/* Reset CSS */
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #f4ede4;
+    color: #3d2f2f;
+    min-height: 100vh;
+    overflow-y: auto; /* Allow vertical scrolling */
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Container */
+.main {
+    display: flex;
+    background-color: #fffaf3;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    flex-direction: row;
+}
+
+/* Left Section */
+.left {
+    padding: 30px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fffaf3;
+}
+
+/* Logo Section */
+.left .logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.left .logo h3 {
+    font-size: 1rem;
+    color: #5a3e36;
+}
+
+/* Headings */
+.left .headings h1 {
+    font-size: 2rem;
+    color: #5a3e36;
+    margin-bottom: 20px;
+}
+
+/* Statistics Section */
+.stats {
+    margin-top: 20px;
+    background-color: #f0e6d2;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.stats p {
+    font-size: 1rem;
+    margin: 8px 0;
+    color: #5a3e36;
+}
+
+.stats span {
+    font-weight: bold;
+}
+
+/* Button */
+.left button {
+    padding: 12px 30px;
+    background-color: #8b5e3c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.left button a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.left button:hover {
+    background-color: #6e4a2e;
+}
+
+/* Camera Section */
+.camera {
+    width: 650px;
+    height: 500px;
+    background-color: #e9dcc7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+#canvas {
+    width: 100%; /* Full width of the parent container */
+    height: auto; /* Maintain aspect ratio */
+    /* max-height: 100%; Prevent overflow */
+    display: block; /* Removes extra space caused by inline elements */
+    aspect-ratio: 4 / 3.5; /* Maintain the aspect ratio of 640x480 */
+    background-color: #e9dcc7; /* Optional: same as the camera background */
+    object-fit: contain; /* Ensure the content fits well */
+}
+
+
+/* Video Container */
+.video-container {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3; /* Preserve aspect ratio */
+}
+
+/* Footer */
+footer {
+    background-color: #3d2f2f;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo {
+        align-items: center;
+        flex-direction: column;
+        position: static;
+        margin-bottom: 20px;
+    }
+    .main {
+        flex-direction: column;
+        width: 90%;
+        height: auto; /* Allow content to grow */
+        margin: 10px auto;
+    }
+    h1{
+        text-align: center;
+    }
+
+    .camera {
+        width: auto;
+        height: 250px;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+    .left .headings h1 {
+        font-size: 1.5rem;
+    }
+    .logo {
+        align-items: center;
+        flex-direction: column;
+        position: static;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .stats p {
+        font-size: 0.9rem;
+    }
+
+    .logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+}
