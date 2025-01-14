@@ -15,7 +15,6 @@ This project is a machine learning-based application that detects whether a pers
 7. [Usage](#usage)
 8. [Screenshots](#screenshots)
 9. [Future Work](#future-work)
-10. [Contributors](#contributors)
 
 ---
 
@@ -106,11 +105,6 @@ The dataset contains labeled images of individuals with masks and without masks.
 
 ---
 
-## Contributors
-- **Your Name** - Developer and Researcher
-- **Additional Contributors** - Mention their roles here
-
----
 
 Feel free to contribute to this project by raising issues or submitting pull requests!
 
