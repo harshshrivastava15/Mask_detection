@@ -101,7 +101,7 @@ The dataset contains labeled images of individuals with masks and without masks.
 ## Future Work
 - Expand dataset to include diverse scenarios and demographics.
 - Improve detection accuracy under challenging conditions like low light and occlusion.
-- Develop a mobile application for mask detection.
+- Develop a mobile application for mask detection .
 
 ---
 
