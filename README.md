@@ -57,7 +57,7 @@ The dataset contains labeled images of individuals with masks and without masks.
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repository/mask-detection.git
+   git clone https://github.com/harshshrivastava15/Mask_detection.git
    ```
 2. Navigate to the project directory:
    ```bash
